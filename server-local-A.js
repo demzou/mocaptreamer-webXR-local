@@ -28,17 +28,20 @@ updSocket.on('message', function (msg, info){
     //console.log(String.fromCharCode.apply(null, new Uint8Array(msg)));
     let msgString = String.fromCharCode.apply(null, new Uint8Array(msg));
 
-    if (msg.length == 1024) {
-      firstPartMsg = msgString;
-    } else  {
-      if (firstPartMsg.length !=0) {
-        secPartMsg = msgString;
+    //---- Uncomment for Mac! Issue with package being split in half
 
-        let fullBvh = addHeader(firstPartMsg + secPartMsg);
-        //io.sockets.emit('bvh', fullBvh);
-        io.emit('bvhA', fullBvh);
-      }
-    }
+    // if (msg.length == 1024) {
+    //   firstPartMsg = msgString;
+    // } else  {
+    //   if (firstPartMsg.length !=0) {
+    //     secPartMsg = msgString;
+
+    //let fullBvh = addHeader(firstPartMsg + secPartMsg);       // mac version
+
+    let fullBvh = addHeader(msgString);     // pc version
+    io.emit('bvhA', fullBvh);
+//      }
+//    }
  });
 
  updSocket.on('listening', function(){
