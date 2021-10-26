@@ -4,7 +4,7 @@
 
 const socketio = require('socket.io-client');
 //let io = socketio.connect('ws://localhost:3000');
-const io = socketio('https://rusalka.herokuapp.com', { transports: ["websocket"] });
+const io = socketio('https://mocapstreamer.herokuapp.com', { transports: ["websocket"] });
 
 io.on("connect", function () {
     console.log("Connected");
@@ -36,7 +36,7 @@ updSocket.on('message', function (msg, info){
 
         let fullBvh = addHeader(firstPartMsg + secPartMsg);
         //io.sockets.emit('bvh', fullBvh);
-        io.emit('bvh', fullBvh);
+        io.emit('bvhA', fullBvh);
       }
     }
  });
